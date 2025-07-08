@@ -4,8 +4,16 @@ from db import get_connection
 class CustomerRepository:
     def fetch_all(self):
         query = """
-        SELECT country.Code, country.Name, contry.Population
-        FROM country;
+        SELECT 
+            country.Code, 
+            country.Name, 
+            country.Population, 
+            city.Name AS Capital, 
+            city.Population AS Poblacion_Capital
+        FROM 
+            country
+        JOIN 
+            City ON country.Capital = city.ID;
         """
         conn = get_connection()
         cursor = conn.cursor()
